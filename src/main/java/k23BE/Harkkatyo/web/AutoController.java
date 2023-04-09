@@ -44,9 +44,9 @@ public class AutoController {
 	}
 	
 	// autojen muokkaaminen
-	@RequestMapping(value = "/editAuto/{rekno}", method = RequestMethod.GET)
-	public String editAuto(@PathVariable("rekno") Long rekno, Model model) {
-		model.addAttribute("editAuto", autoRepository.findById(rekno));
+	@RequestMapping(value = "/editAuto/{autoid}", method = RequestMethod.GET)
+	public String editAuto(@PathVariable("autoid") Long autoid, Model model) {
+		model.addAttribute("editAuto", autoRepository.findById(autoid));
 		return "editAuto";
 	}
 	

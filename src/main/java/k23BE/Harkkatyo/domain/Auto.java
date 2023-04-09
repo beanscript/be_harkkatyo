@@ -3,35 +3,43 @@ package k23BE.Harkkatyo.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+//import javax.persistence.Table;
 
-// import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//@Table(name="auto")
 public class Auto {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long rekno;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long autoid;
+	@Column(name = "merkki", nullable = false)
 	private String merkki;
+	@Column(name = "malli", nullable = false)
 	private String malli;
 	private String vuosi;
+	private String rekno;
 	private String tiedot;
 	private double hinta;
 	private String kuva; // hox
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "auto")
+	@JsonIgnore
 	private List<Projekti> projektit;
 
 	// pelkkä auto constructor
-	public Auto(String merkki, String malli, String vuosi, String tiedot, double hinta, String kuva) {
+	public Auto(String merkki, String malli, String vuosi, String rekno, String tiedot, double hinta, String kuva) {
 		super();
 		this.merkki = merkki;
 		this.malli = malli;
 		this.vuosi = vuosi;
+		this.rekno = rekno;
 		this.tiedot = tiedot;
 		this.hinta = hinta;
 		this.kuva = kuva;
@@ -41,12 +49,12 @@ public class Auto {
 		super();
 	}
 
-	public Long getRekno() {
-		return rekno;
+	public Long getAutoid() {
+		return autoid;
 	}
 
-	public void setRekno(Long rekno) {
-		this.rekno = rekno;
+	public void setAutoid(Long autoid) {
+		this.autoid = autoid;
 	}
 
 	public String getMerkki() {
@@ -71,6 +79,14 @@ public class Auto {
 
 	public void setVuosi(String vuosi) {
 		this.vuosi = vuosi;
+	}
+	
+	public String getRekno() {
+		return rekno;
+	}
+
+	public void setRekno(String rekno) {
+		this.rekno = rekno;
 	}
 
 	public String getTiedot() {
@@ -107,7 +123,7 @@ public class Auto {
 
 	@Override
 	public String toString() {
-		return "Auto [rekno=" + rekno + ", merkki=" + merkki + ", malli=" + malli + ", vuosi=" + vuosi + ", tiedot="
+		return "Auto [autoid=" + autoid + ", merkki=" + merkki + ", malli=" + malli + ", rekno=" + rekno + ", vuosi=" + vuosi + ", tiedot="
 				+ tiedot + ", hinta=" + hinta + ", kuva=" + kuva + "]";
 	}
 	

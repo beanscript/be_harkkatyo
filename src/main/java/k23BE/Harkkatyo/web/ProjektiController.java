@@ -1,6 +1,7 @@
 package k23BE.Harkkatyo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,14 +16,20 @@ import k23BE.Harkkatyo.domain.TilaRepository;
 @Controller
 public class ProjektiController {
 	@Autowired
-	ProjektiRepository projektiRepository;
+	private ProjektiRepository projektiRepository;
 	@Autowired
 	private AutoRepository autoRepository;
 	@Autowired
 	private TilaRepository tilaRepository;
 	
+	// etusivu
+	@RequestMapping(value = { "/", "/index" })
+	public String index() {
+		return "index";
+	}
+	
 	// projektien listaus
-	@RequestMapping(value = { "/", "/projectlist" })
+	@RequestMapping(value = "/projectlist")
 	public String projectList(Model model) {
 		model.addAttribute("projektit", projektiRepository.findAll());
 		return "projectlist";
@@ -30,6 +37,7 @@ public class ProjektiController {
 	
 	// uusien projektien lisääminen
 	@RequestMapping(value = "/addProject")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	public String add(Model model) {
 		model.addAttribute("uusiProjekti", new Projekti());
 		model.addAttribute("autot", autoRepository.findAll());
@@ -38,6 +46,7 @@ public class ProjektiController {
 	}
 	
 	@RequestMapping(value = "/saveProject", method = RequestMethod.POST)
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveProject(Projekti projekti) {
 		projektiRepository.save(projekti);
 		return "redirect:projectlist";
@@ -45,6 +54,7 @@ public class ProjektiController {
 	
 	// projektien muokkaaminen
 	@RequestMapping(value = "/editProject/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editProject(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("editProject", projektiRepository.findById(id));
 		model.addAttribute("autot", autoRepository.findAll());
@@ -54,6 +64,7 @@ public class ProjektiController {
 	
 	// projektien poistaminen
 	@RequestMapping(value = "/deleteProject/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteProject(@PathVariable("id") Long id, Model model) {
 		projektiRepository.deleteById(id);
 		return "redirect:../projectlist";

@@ -1,25 +1,29 @@
 package k23BE.Harkkatyo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+//import javax.persistence.Table;
 
 
 @Entity
+//@Table(name="projekti")
 public class Projekti {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "nimi", nullable = false)
 	private String nimi;
 	private String osat;
 	private String kuvaus;
 	private double kustannukset;
 	
 	@ManyToOne
-	@JoinColumn(name = "rekno")
+	@JoinColumn(name = "autoid")
 	private Auto auto;
 	
 	@ManyToOne
@@ -35,6 +39,15 @@ public class Projekti {
 		this.kustannukset = kustannukset;
 		this.auto = auto;
 		this.tila = tila;
+	}
+	
+	// pelkkä projekti
+	public Projekti(String nimi, String osat, String kuvaus, double kustannukset) {
+		super();
+		this.nimi = nimi;
+		this.osat = osat;
+		this.kuvaus = kuvaus;
+		this.kustannukset = kustannukset;
 	}
 
 	public Projekti() {
