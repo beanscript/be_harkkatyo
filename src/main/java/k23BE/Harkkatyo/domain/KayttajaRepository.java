@@ -5,6 +5,5 @@ package k23BE.Harkkatyo.domain;
 import org.springframework.data.repository.CrudRepository;
 
 public interface KayttajaRepository extends CrudRepository<Kayttaja, Long> {
-	Kayttaja findByUsername(String username);
-	//Optional<Kayttaja> findByUsername(String username);
+	Kayttaja findByTunnus(String tunnus);
 }

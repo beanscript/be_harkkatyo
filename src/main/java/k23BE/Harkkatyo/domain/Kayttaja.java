@@ -6,29 +6,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name="users")
+@Entity
 public class Kayttaja {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long kayttajaid;
 	private String nimi;
+	@Column(name = "rooli", nullable = false)
 	private String rooli;
-	@Column(name = "username", nullable = false, unique = true)
-	private String username;
+	@Column(name = "tunnus", nullable = false, unique = true)
+	private String tunnus;
 	@Column(name = "salasana", nullable = false)
 	private String salasana;
 	
-	public Kayttaja(String nimi, String rooli, String username, String salasana) {
+	public Kayttaja(String nimi, String rooli, String tunnus, String salasana) {
 		super();
 		this.nimi = nimi;
 		this.rooli = rooli;
-		this.username = username;
+		this.tunnus = tunnus;
 		this.salasana = salasana;
 	}
 	
-	public Kayttaja(String username, String salasana) {
+	public Kayttaja(String tunnus, String salasana) {
 		super();
-		this.username = username;
+		this.tunnus = tunnus;
 		this.salasana = salasana;
 	}
 
@@ -60,11 +61,11 @@ public class Kayttaja {
 	}
 
 	public String getUsername() {
-		return username;
+		return tunnus;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsername(String tunnus) {
+		this.tunnus = tunnus;
 	}
 
 	public String getSalasana() {
@@ -75,11 +76,11 @@ public class Kayttaja {
 		this.salasana = salasana;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Kayttaja [kayttajaid=" + kayttajaid + ", nimi=" + nimi + ", rooli=" + rooli + ", username=" + username
-//				+ ", salasana=" + salasana + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Kayttaja [kayttajaid=" + kayttajaid + ", nimi=" + nimi + ", rooli=" + rooli + ", tunnus=" + tunnus
+				+ ", salasana=" + salasana + "]";
+	}
 	
 	
 	

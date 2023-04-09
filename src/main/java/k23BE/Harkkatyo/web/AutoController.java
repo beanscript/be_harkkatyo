@@ -3,6 +3,7 @@ package k23BE.Harkkatyo.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +28,7 @@ public class AutoController {
 	
 	// uusien autojen lisääminen
 	@RequestMapping(value = "/addAuto")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addAuto(Model model) {
 		model.addAttribute("uusiAuto", new Auto());
 		return "addauto";
@@ -34,6 +36,7 @@ public class AutoController {
 	
 	// tallennus ja vähän validointia
 	@RequestMapping(value = "/saveAuto", method = RequestMethod.POST)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveAuto(@Valid Auto auto, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("jotain meni pieleen");
@@ -45,6 +48,7 @@ public class AutoController {
 	
 	// autojen muokkaaminen
 	@RequestMapping(value = "/editAuto/{autoid}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editAuto(@PathVariable("autoid") Long autoid, Model model) {
 		model.addAttribute("editAuto", autoRepository.findById(autoid));
 		return "editAuto";

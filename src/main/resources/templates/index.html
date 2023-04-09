@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>KDM Garage</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+	
+</head>
+<body>
+	<h1>Lista kaikista meidän projekteista</h1>
+	
+	<h4>Hei [[${#httpServletRequest.remoteUser}]]!</h4>
+
+	<table class="table table-striped">
+		<tr>
+			<th>Nimi</th>
+			<th>Osat</th>
+			<th>Kuvaus</th>
+			<th>Kustannukset</th>
+			<th>Tila</th>
+			<th>Auto</th>
+			<th colspan="2">Toiminnot</th>
+		</tr>
+		<tr th:each="project : ${projektit}">
+			<td th:text="${project.nimi}"></td>
+			<td th:text="${project.osat}"></td>
+			<td th:text="${project.kuvaus}"></td>
+			<td th:text="${project.kustannukset}"></td>
+			<td th:text="${project.tila.nimike}"></td>
+			<td th:text="${project.auto.malli}"></td>
+			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/editProject/{id}(id=${project.id})}" class="btn btn-success">Muokkaa</a></td>
+			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/deleteProject/{id}(id=${project.id})}" class="btn btn-danger">Poista</a></td>
+		</tr>
+		<tr>
+			<td><a href="/addProject" class="btn btn-success">Lisää projekti</a></td>
+		</tr>
+	</table>
+	
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Kirjaudu ulos"/>
+	</form>
+
+</body>
+</html>

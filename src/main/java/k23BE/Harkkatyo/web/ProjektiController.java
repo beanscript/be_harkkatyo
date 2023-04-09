@@ -1,9 +1,12 @@
 package k23BE.Harkkatyo.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +40,7 @@ public class ProjektiController {
 	
 	// uusien projektien lisääminen
 	@RequestMapping(value = "/addProject")
-	//@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String add(Model model) {
 		model.addAttribute("uusiProjekti", new Projekti());
 		model.addAttribute("autot", autoRepository.findAll());
@@ -46,8 +49,12 @@ public class ProjektiController {
 	}
 	
 	@RequestMapping(value = "/saveProject", method = RequestMethod.POST)
-	//@PreAuthorize("hasAuthority('ADMIN')")
-	public String saveProject(Projekti projekti) {
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String saveProject(@Valid Projekti projekti, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("jotain meni pieleen");
+			return "addProject";
+		}
 		projektiRepository.save(projekti);
 		return "redirect:projectlist";
 	}

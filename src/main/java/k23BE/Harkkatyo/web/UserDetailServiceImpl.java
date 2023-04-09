@@ -1,7 +1,5 @@
 package k23BE.Harkkatyo.web;
 
-//import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,29 +24,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	}
 	
 	@Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.info("kayttajaByUsername: " + username);
-    	Kayttaja curruser = repository.findByUsername(username);
-        UserDetails user = new org.springframework.security.core.userdetails.User(username, curruser.getSalasana(), 
-        		AuthorityUtils.createAuthorityList(curruser.getRooli()));
+    public UserDetails loadUserByUsername(String tunnus) throws UsernameNotFoundException {
+		log.info("kayttajaByTunnus: " + tunnus);
+    	Kayttaja curruser = repository.findByTunnus(tunnus);
+        UserDetails user = new org.springframework.security.core.userdetails.User(tunnus, curruser.getSalasana(), AuthorityUtils.createAuthorityList(curruser.getRooli()));
         return user;
     }
-	
-//	@Override
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//		Optional<Kayttaja> user = repository.findByUsername(username);
-//
-//		UserBuilder builder = null;
-//		if (user.isPresent()) {
-//			Kayttaja currentUser = user.get();
-//			builder = org.springframework.security.core.userdetails.User.withUsername(username);
-//			builder.password(currentUser.getSalasana());
-//			builder.roles(currentUser.getRooli());
-//		} else {
-//			throw new UsernameNotFoundException("User not found.");
-//		}
-//
-//		return builder.build();	    
-//	}
 	
 }

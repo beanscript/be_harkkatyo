@@ -17,13 +17,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //@Table(name="auto")
 public class Auto {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long autoid;
 	@Column(name = "merkki", nullable = false)
 	private String merkki;
-	@Column(name = "malli", nullable = false)
+	@Column(name = "malli", nullable = false, unique = true)
 	private String malli;
-	private String vuosi;
+	private int vuosi;
 	private String rekno;
 	private String tiedot;
 	private double hinta;
@@ -34,7 +34,7 @@ public class Auto {
 	private List<Projekti> projektit;
 
 	// pelkkä auto constructor
-	public Auto(String merkki, String malli, String vuosi, String rekno, String tiedot, double hinta, String kuva) {
+	public Auto(String merkki, String malli, int vuosi, String rekno, String tiedot, double hinta, String kuva) {
 		super();
 		this.merkki = merkki;
 		this.malli = malli;
@@ -73,11 +73,11 @@ public class Auto {
 		this.malli = malli;
 	}
 
-	public String getVuosi() {
+	public int getVuosi() {
 		return vuosi;
 	}
 
-	public void setVuosi(String vuosi) {
+	public void setVuosi(int vuosi) {
 		this.vuosi = vuosi;
 	}
 	

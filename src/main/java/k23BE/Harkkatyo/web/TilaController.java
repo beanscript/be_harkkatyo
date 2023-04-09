@@ -3,6 +3,7 @@ package k23BE.Harkkatyo.web;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ public class TilaController {
 	
 	// uusien tilojen lisääminen
 	@RequestMapping(value = "/addTila")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addTila(Model model) {
 		model.addAttribute("uusiTila", new Tila());
 		return "addtila";
@@ -35,6 +37,7 @@ public class TilaController {
 	
 	// tallennus ja vähän validointia
 	@RequestMapping(value = "/saveTila", method = RequestMethod.POST)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String saveTila(@Valid Tila tila, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			System.out.println("jotain meni pieleen");
@@ -46,6 +49,7 @@ public class TilaController {
 	
 	// tilojen muokkaaminen
 	@RequestMapping(value = "/editTila/{tilaid}", method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editTila(@PathVariable("tilaid") Long tilaid, Model model) {
 		model.addAttribute("editTila", tilaRepository.findById(tilaid));
 		return "editTila";

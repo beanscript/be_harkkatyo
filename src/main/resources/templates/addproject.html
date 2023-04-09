@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Lisää</h1>
+	<h1>Lisää uusi projekti</h1>
 	<div>
 	<form th:object="${uusiProjekti}" th:action="@{saveProject}" action="#" method="post">
 		  	<div>
@@ -28,7 +28,7 @@
 			<div>		
 		  		<label>Auto</label>
 				<select id="autot" th:field="*{auto}" class="form-control">
-					<option th:each="auto: ${autot}" th:value="${auto.rekno}" th:text="${auto.malli}"></option>
+					<option th:each="auto: ${autot}" th:value="${auto.autoid}" th:text="${auto.malli}"></option>
 				</select>
 			</div>
 			<div>
@@ -39,7 +39,7 @@
 			</div>
 			<br>
 			
-			<input type="submit" value="Tallenna" class="btn btn-success"></input>
+			<input type="submit" value="Lisää" class="btn btn-success"></input>
 		</form>
 	
 	</div>

@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AutoRepository extends CrudRepository<Auto, Long> {
 	List<Auto> findByMalli(String malli);
+	List<Auto> findByAutoid(Long autoid);
 }

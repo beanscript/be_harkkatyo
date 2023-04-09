@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Muokkaa autoa</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>Muokkaa olemassaolevaa projektiautoa</h1>
+	<div>
+	<form th:object="${editAuto}" th:action="@{/saveAuto}" action="#" method="post">
+			<input type="hidden" id="autoid" th:field="*{autoid}" />
+		  	<div>
+			  	<label>Merkki</label>
+				<input type="text" th:field="*{merkki}" />
+			</div>
+			<div>
+			  	<label>Malli</label>
+			  	<input type="text" th:field="*{malli}" />
+			</div>
+			<div>
+			  	<label>Vuosimalli</label>
+				<input type="text" th:field="*{vuosi}" />
+			</div>
+			<div>
+			  	<label>Rekisterinumero</label>
+				<input type="text" th:field="*{rekno}" />
+			</div>
+			<div>
+			  	<label>Tiedot</label>
+				<textarea th:field="*{tiedot}" rows="1" cols="30"></textarea>
+			</div>
+			<div>
+			  	<label>Ostohinta</label>
+				<input type="number" placeholder="0.00" min="0" value="0" step="any" th:field="*{hinta}" />
+			</div>
+			<div>
+			  	<label>Kuva (url)</label>
+				<input type="url" th:field="*{kuva}" />
+			</div>
+			<br>
+			
+			<input type="submit" value="Tallenna" class="btn btn-success"></input>
+		</form>
+	
+	</div>
+
+ 	
+</body>
+</html>
