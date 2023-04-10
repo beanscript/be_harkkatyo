@@ -25,21 +25,17 @@
 	      		<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">[[${#httpServletRequest.remoteUser}]]</a>
 	     	<div class="dropdown-menu">
 		        <a class="dropdown-item" href="#">Omat tiedot</a>
-		        <a class="dropdown-item btn btn-link" href="/addAuto">Lisää auto</a>
 		        <form class="dropdown-item" th:action="@{/logout}" method="post"><button class="btn btn-link" type="submit"> Kirjaudu ulos</button></form>
 	      	</div>
 			</li>
 			<li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Kirjaudu sisään</a></li>
 		</ul>
 	</nav>
+	
+	<div class="container-fluid" th:each="user : ${user}">
 
-	<div class="container-fluid">
-	
-	<h1>Tervetuloa KDM Garagen kotisivuille!</h1>
-	
-	<p>Tämä on meidän pikku projekti garage, jossa on innokkaiden autoharrastajien projektiautoja. Sivut ovat sitä varten, että niitä ketkä kiinnostaa pääsee seuraamaan näiden rakentumista.</p>
-	<p>Autojen omistajat ovat pieni kaveriporukka kotoisin ympäri Suomea. Talli sijaitsee Uudellamaalla. Me kierretään autojen kanssa myös tapahtumia.</p>
-	<img src="http://impoliteorange.altervista.org/koulu/velo/hellcat.jpg" alt="Hellcatti" width="50%" style="margin:20px;">
+
+	<h1>Hei <span th:text="${user.nimi}"></span></h1>
 	
 	</div>
 

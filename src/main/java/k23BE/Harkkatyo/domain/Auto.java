@@ -9,12 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-//import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-//@Table(name="auto")
 public class Auto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +25,7 @@ public class Auto {
 	private String rekno;
 	private String tiedot;
 	private double hinta;
-	private String kuva; // hox
+	private String kuva;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "auto")
 	@JsonIgnore

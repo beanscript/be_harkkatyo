@@ -19,7 +19,21 @@ public class AutoController {
 	@Autowired
 	AutoRepository autoRepository;
 	
-	// autojen listaus
+	// veloster
+	@RequestMapping(value = "/veloster")
+	public String velosterInfo(Model model) {
+		model.addAttribute("velo", autoRepository.findByMalli("Veloster"));
+		return "veloster";
+	}
+	
+	// hellcat
+	@RequestMapping(value = "/hellcat")
+	public String hellcatInfo(Model model) {
+		model.addAttribute("cat", autoRepository.findByMalli("Challenger Hellcat"));
+		return "hellcat";
+	}
+	
+	// kaikkien autojen listaus
 	@RequestMapping(value = "/autot")
 	public String autoList(Model model) {
 		model.addAttribute("autos", autoRepository.findAll());

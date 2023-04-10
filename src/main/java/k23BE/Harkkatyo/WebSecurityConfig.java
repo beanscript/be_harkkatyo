@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -18,19 +19,28 @@ public class WebSecurityConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+	private static final AntPathRequestMatcher[] WHITE_LIST_URLS = {
+            new AntPathRequestMatcher("/h2-console/**"),
+            new AntPathRequestMatcher("/project/**")
+    };
+	
 	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeHttpRequests()
-			.antMatchers("/css/**").permitAll()
-			.antMatchers("/", "/projectlist").permitAll()
+		.requestMatchers(WHITE_LIST_URLS)
+		.permitAll()
+		.and()
+		.authorizeHttpRequests()
+			.antMatchers("/css/**", "/js/**").permitAll()
+			.antMatchers("/", "/index").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.headers().frameOptions().disable()			
 			.and()
 		.formLogin()
 //			.loginPage("/login")
-			.defaultSuccessUrl("/projectlist", true)
+			.defaultSuccessUrl("/index", true)
 			.permitAll()
 			.and()
 		.logout()

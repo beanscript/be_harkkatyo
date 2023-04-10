@@ -1,21 +1,21 @@
 package k23BE.Harkkatyo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Bean;
 
-import k23BE.Harkkatyo.domain.Auto;
-import k23BE.Harkkatyo.domain.AutoRepository;
-import k23BE.Harkkatyo.domain.Kayttaja;
-import k23BE.Harkkatyo.domain.KayttajaRepository;
-import k23BE.Harkkatyo.domain.Projekti;
-import k23BE.Harkkatyo.domain.ProjektiRepository;
-import k23BE.Harkkatyo.domain.Tila;
-import k23BE.Harkkatyo.domain.TilaRepository;
+//import k23BE.Harkkatyo.domain.Auto;
+//import k23BE.Harkkatyo.domain.AutoRepository;
+//import k23BE.Harkkatyo.domain.Kayttaja;
+//import k23BE.Harkkatyo.domain.KayttajaRepository;
+//import k23BE.Harkkatyo.domain.Projekti;
+//import k23BE.Harkkatyo.domain.ProjektiRepository;
+//import k23BE.Harkkatyo.domain.Tila;
+//import k23BE.Harkkatyo.domain.TilaRepository;
 
 @SpringBootApplication
 public class HarkkatyoApplication {

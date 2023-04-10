@@ -1,5 +1,7 @@
 package k23BE.Harkkatyo.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import k23BE.Harkkatyo.domain.Projekti;
+import k23BE.Harkkatyo.domain.Auto;
 import k23BE.Harkkatyo.domain.AutoRepository;
 import k23BE.Harkkatyo.domain.ProjektiRepository;
 import k23BE.Harkkatyo.domain.TilaRepository;
@@ -37,6 +41,12 @@ public class ProjektiController {
 		model.addAttribute("projektit", projektiRepository.findAll());
 		return "projectlist";
 	}
+	
+	// REST projekti by auto
+    @RequestMapping(value="/project/{auto}", method = RequestMethod.GET)
+    public @ResponseBody List<Projekti> findProjektiRest(@PathVariable("auto") Auto malli) {	
+    	return projektiRepository.findByAuto(malli);
+    }
 	
 	// uusien projektien lisääminen
 	@RequestMapping(value = "/addProject")

@@ -1,6 +1,5 @@
 package k23BE.Harkkatyo.domain;
 
-//import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 

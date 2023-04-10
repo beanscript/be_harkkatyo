@@ -32,14 +32,35 @@
 			<li class="nav-item"><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Kirjaudu sisään</a></li>
 		</ul>
 	</nav>
+	
+	<div class="container-fluid" th:each="auto : ${cat}">
 
-	<div class="container-fluid">
+
+	<h1 th:text="${auto.merkki + ' ' + auto.malli}"></h1>
 	
-	<h1>Tervetuloa KDM Garagen kotisivuille!</h1>
+	<div class="d-flex flex-nowrap">
+	  <div class="p-2" style="background-color:#92ccdd; padding:10px;">
+	  	vm <span th:text="${auto.vuosi}"></span><br>
+	  	<span th:text="${auto.rekno}"></span>
+	  </div>
+	  <div class="p-2" style="background-color:#c7eff0; padding:10px;">
+	  	Speksit<br>
+	  	<span th:text="${auto.tiedot}"></span>
+	  </div>
+	  <div class="p-2" style="background-color:#f5d5fd; padding:10px;">
+	  	Ostohinta<br>
+	  	<span th:text="${auto.hinta}"></span> €
+	  </div>
+	  <div class="p-2" style="background-color:#fdc4ec; padding:10px;">
+	  	Katso tämän auton projektit<br>
+	  	<a href="project/2">TÄSTÄ</a>
+	  </div>
+	  <div class="p-2" style="background-color:#ffc2cb; padding:10px;">
+	  	<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/editAuto/{id}(id=${auto.autoid})}" class="btn btn-success">Muokkaa</a>
+	  </div>
+	</div>
 	
-	<p>Tämä on meidän pikku projekti garage, jossa on innokkaiden autoharrastajien projektiautoja. Sivut ovat sitä varten, että niitä ketkä kiinnostaa pääsee seuraamaan näiden rakentumista.</p>
-	<p>Autojen omistajat ovat pieni kaveriporukka kotoisin ympäri Suomea. Talli sijaitsee Uudellamaalla. Me kierretään autojen kanssa myös tapahtumia.</p>
-	<img src="http://impoliteorange.altervista.org/koulu/velo/hellcat.jpg" alt="Hellcatti" width="50%" style="margin:20px;">
+	<img th:src="${auto.kuva}" style="width:50%; margin:10px 0 10px 0; border: 5px solid red;"/>
 	
 	</div>
 
